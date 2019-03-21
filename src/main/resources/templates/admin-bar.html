@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<!-- 头部 -->
+<header ng-controller="adminInfoCtrl" th:fragment="admin-topbar">
+    <!-- logo -->
+    <div class="am-fl tpl-header-logo">
+        <a href="javascript:;"><img src="img/admin-logo.png" alt=""/></a>
+    </div>
+    <!-- 右侧内容 -->
+    <div class="tpl-header-fluid">
+        <!-- 侧边切换 -->
+        <div class="am-fl tpl-header-switch-button am-icon-list">
+                <span>
+
+            </span>
+        </div>
+
+        <!-- 其它功能-->
+        <div class="am-fr tpl-header-navbar">
+            <ul>
+                <!-- 欢迎语 -->
+                <li class="am-text-sm tpl-header-navbar-welcome">
+                    <a href="javascript:;">欢迎, <span>{{adminname}}</span> </a>
+                </li>
+
+                <!-- 新提示 -->
+                <!-- <li class="am-dropdown" data-am-dropdown="">
+                     <a href="javascript:;" class="am-dropdown-toggle" data-am-dropdown-toggle="">
+                         <i class="am-icon-bell"></i>
+                         <span class="am-badge am-badge-warning am-round item-feed-badge">5</span>
+                     </a>
+
+                     &lt;!&ndash; 弹出列表 &ndash;&gt;
+                     <ul class="am-dropdown-content tpl-dropdown-content">
+                         <li class="tpl-dropdown-menu-notifications">
+                             <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
+                                 <div class="tpl-dropdown-menu-notifications-title">
+                                     <i class="am-icon-line-chart"></i>
+                                     <span> 有n位新用户注册</span>
+                                 </div>
+                                 <div class="tpl-dropdown-menu-notifications-time">
+                                     12分钟前
+                                 </div>
+                             </a>
+                         </li>
+                         <li class="tpl-dropdown-menu-notifications">
+                             <a href="javascript:;" class="tpl-dropdown-menu-notifications-item am-cf">
+                                 <div class="tpl-dropdown-menu-notifications-title">
+                                     <i class="am-icon-star"></i>
+                                     <span> 有n条新评论</span>
+                                 </div>
+                                 <div class="tpl-dropdown-menu-notifications-time">
+                                     30分钟前
+                                 </div>
+                             </a>
+                         </li>
+
+                     </ul>
+                 </li>-->
+
+                <!-- 退出 -->
+                <li class="am-text-sm">
+                    <a href="#" ng-click="exit()">
+                        <span class="am-icon-sign-out"></span> 退出
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<!-- 侧边导航栏 -->
+<div class="left-sidebar" th:fragment="admin-sidebar">
+    <!-- 菜单 -->
+    <ul class="sidebar-nav">
+        <li class="sidebar-nav-heading"></li>
+
+        <li class="sidebar-nav-link">
+            <a href="javascript:" class="sidebar-nav-sub-title" th:class="${activeTitle==1?'active sidebar-nav-sub-title':'sidebar-nav-sub-title'}">
+                <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 信息上传
+                <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+            </a>
+            <ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
+                <li class="sidebar-nav-link">
+                    <a href="admin-index" class="sub-active" th:class="${activeUri=='admin-index.html'?'sub-active':''}">
+                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 电影上传
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="admin-actor" class="sub-active" th:class="${activeUri=='admin-actor.html'?'sub-active':''}">
+                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 演员上传
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="sidebar-nav-link">
+            <a href="javascript:" class="sidebar-nav-sub-title" th:class="${activeTitle==0?'active sidebar-nav-sub-title':'sidebar-nav-sub-title'}">
+                <i class="am-icon-table sidebar-nav-link-logo"></i> 管理列表
+                <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+            </a>
+            <ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
+                <li class="sidebar-nav-link">
+                    <a href="admin-movies" class="sub-active" th:class="${activeUri=='admin-movies.html'?'sub-active':''}">
+                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 电影列表
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="admin-actors" class="sub-active" th:class="${activeUri=='admin-actors.html'?'sub-active':''}">
+                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 演员列表
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="admin-users" class="sub-active" th:class="${activeUri=='admin-users.html'?'sub-active':''}">
+                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 用户列表
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="admin-remark" class="sub-active" th:class="${activeUri=='admin-remark.html'?'sub-active':''}">
+                        <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 评论列表
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+
+</body>
+</html>

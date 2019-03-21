@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>实时票房</title>
+    <link href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet"/>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
+
+    <script>
+        var myApp=angular.module('boxApp', []);
+    </script>
+
+    <script type="text/javascript" src="/js/box-office.js"></script>
+    <script type="text/javascript" src="/js/header.js"></script>
+</head>
+<body ng-app="boxApp">
+<!-- 引入topBar -->
+<div th:replace="bar::topbar(activeUri='box-office.html')"></div>
+
+<!--实时票房-->
+<div class="am-container" ng-controller="boxCtrl">
+    <h1>实时票房 {{time}}</h1>
+    <table width="100%" class="am-table am-table-compact am-table-striped am-table-bordered am-table-radius tpl-table-black ">
+        <thead>
+        <tr>
+            <th>排行</th>
+            <th>影片</th>
+            <th>日票房（万）</th>
+            <th>票房占比</th>
+            <th>上映天数</th>
+            <th>累计票房（万）</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="even gradeC" ng-repeat="boxoffice in boxoffices">
+            <td>{{boxoffice.irank}}</td>
+            <td><a href="" ng-click="selectMovieName(boxoffice.movieName)">{{boxoffice.movieName}}</a></td>
+            <td>{{boxoffice.boxOffice}}</td>
+            <td>{{boxoffice.boxPer}}%</td>
+            <td>{{boxoffice.movieDay}} 天</td>
+            <td>{{boxoffice.sumBoxOffice}}</td>
+
+        </tr>
+        <!-- more data -->
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

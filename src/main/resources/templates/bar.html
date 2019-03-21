@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header class="am-topbar am-topbar-fixed-top" ng-controller="headerCtrl" th:fragment="topbar">
+        <div class="am-container">
+            <!--logo-->
+            <h1 class="am-topbar-brand">
+                <img src="/img/logo.jpg" height="43" width="139"/>
+            </h1>
+
+            <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+                <ul class="am-nav am-nav-pills am-topbar-nav">
+                    <li class="am-active" th:class="${activeUri=='index.html'?'am-active':''}"><a href="/index">首页</a></li>
+                    <li class="am-active" th:class="${activeUri=='movie-list.html'?'am-active':''}"><a href="/tolist">电影列表</a></li>
+                    <!--<li><a href="/classic-list">经典影片</a></li>-->
+                    <li class="am-active" th:class="${activeUri=='actor-list.html'?'am-active':''}"><a href="/actor-list">演员列表</a></li>
+                    <li class="am-active" th:class="${activeUri=='box-office.html'?'am-active':''}"><a href="/box-office">实时票房</a></li>
+                </ul>
+
+                <!-- 当页面是用户电影界面时不显示 -->
+                <th:block th:unless="${activeUri=='my-movies.html'}">
+                <div class="{{passport}}">
+                    <div class="am-topbar-right ">
+                        <button onclick="window.location.href='/toregister'"
+                                class="am-btn am-btn-primary am-topbar-btn am-btn-sm am-radius">
+                            <span class="am-icon-pencil"></span> 注册
+                        </button>
+                    </div>
+                    <div class="am-topbar-right">
+                        <button onclick="window.location.href='/tologin'"
+                                class="am-btn am-btn-primary am-topbar-btn am-btn-sm am-radius">
+                            <span class="am-icon-user"></span> 登陆
+                        </button>
+                    </div>
+                </div>
+                </th:block>
+
+                <div class="{{userinfo}}">
+                    <div class="am-topbar-right">
+                        <button ng-click="exit()"
+                                class="am-btn am-btn-primary am-topbar-btn am-btn-sm am-radius">
+                            <span class="am-icon-sign-out"></span> 退出
+                        </button>
+                    </div>
+                    <th:block th:unless="${activeUri=='my-movies.html'}">
+                    <div class="am-topbar-right" ng-click="myInfo()" >
+                        <img src="http://ponlc6wcj.bkt.clouddn.com/{{img}}" width="48px" class="am-img-thumbnail am-circle" style="margin-right: 10px"/>
+                    </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </header>
+
+</body>
+</html>
