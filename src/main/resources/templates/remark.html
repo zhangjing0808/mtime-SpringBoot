@@ -139,17 +139,19 @@
         <div>
             <ul class="am-comments-list" ng-repeat="remark in remarks">
                 <li style="margin: 10px;">
-                    <img src="http://ponlc6wcj.bkt.clouddn.com/{{remark.user.img}}" alt="" class="am-comment-avatar" width="48" height="48"/>
-
+                    <a href="">
+                        <img src="http://ponlc6wcj.bkt.clouddn.com/{{remark.user.img}}" alt="" class="am-comment-avatar" width="48" height="48"/>
+                    </a>
                     <div class="am-comment-main">
                         <header class="am-comment-hd">
-
                             <div class="am-comment-meta">
                                 <span class="am-comment-author">{{remark.user.nickname}}</span>
                                 <time>{{remark.time}}</time>
+                                <a href="" class="am-icon-thumbs-up" style="float:right;">
+                                    <i>赞</i>
+                                </a>
                             </div>
                         </header>
-
                         <div class="am-comment-bd">
                             {{remark.content}}
                         </div>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yang.dao.UserMapper">
+<mapper namespace="com.zhangjing.dao.UserMapper">
 
-  <resultMap id="UserMap" type="com.yang.entity.User">
+  <resultMap id="UserMap" type="com.zhangjing.entity.User">
     <!--
       WARNING - @mbg.generated
     -->

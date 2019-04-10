@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yang.dao.RemarkMapper">
-  <resultMap id="RemarkMap" type="com.yang.entity.Remark">
+<mapper namespace="com.zhangjing.dao.RemarkMapper">
+  <resultMap id="RemarkMap" type="com.zhangjing.entity.Remark">
     <!--
       WARNING - @mbg.generated
     -->
@@ -10,13 +10,13 @@
     <result column="time" jdbcType="TIMESTAMP" property="time" />
 
     <!--用户和评论一对多-->
-    <association property="user" javaType="com.yang.entity.User">
+    <association property="user" javaType="com.zhangjing.entity.User">
       <id column="userId"  property="userid" />
       <result column="nickName" property="nickname" />
       <result column="img" property="img" />
     </association>
 
-    <association property="movie" javaType="com.yang.entity.Movie">
+    <association property="movie" javaType="com.zhangjing.entity.Movie">
       <id column="movieId"  property="movieid" />
       <result column="titleCn" property="titlecn" />
       <result column="img" property="img" />
@@ -33,5 +33,13 @@
     SELECT t.*,m.* FROM
     remark t,umr u, movie m
     WHERE u.userId=#{id}  AND u.remarkId=t.remarkId AND u.movieId=m.movieId
+  </select>
+
+  <select id="selectAll" resultMap="RemarkMap">
+    select r.remarkId,r.content,r.time,u.userId,u.nickName,u.img,m.movieId,m.titleCn,m.img
+    from remark r inner join umr on umr.remarkId=r.remarkId
+			inner join user u on u.userId=umr.userId
+			inner join movie m on m.movieId=umr.movieId
+			order by r.time desc
   </select>
 </mapper>

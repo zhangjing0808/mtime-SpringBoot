@@ -99,7 +99,26 @@ app.controller('moviesCtrl',function ($scope, $http){
         });
     }
 
-    //选择页码
+    /**
+     * 查看电影信息
+     * @param movie
+     * */
+    $scope.showmovie=function (movie) {
+        console.log("查看电影id:" + movie.movieid);
+        console.log("movie.type:" + movie.type);
+        $scope.titlecn = movie.titlecn;
+        $scope.titleen = movie.titleen;
+        $scope.time = movie.time;
+        $scope.director = movie.director;
+        $scope.actors = movie.actors;
+        $scope.type = movie.type;
+        $scope.story = movie.story;
+    }
+
+
+    /**
+     * 选择页码
+     * */
     $scope.changePage=function (num) {
 
         if(num==0) {
@@ -211,7 +230,7 @@ app.controller('remarkCtrl',function ($scope, $http) {
             onConfirm: function(options) {
                 $http({
                     method:'DELETE',
-                    url: k_protocol+'/remark/delete_'+id,
+                    url: k_protocol+'/remark/delete/'+id,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 }).then(function successCallback(res) {
                     var ob = JSON.parse(JSON.stringify(res.data));

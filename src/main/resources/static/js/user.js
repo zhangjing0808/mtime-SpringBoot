@@ -51,11 +51,16 @@ app.controller('registerCtrl',function ($scope, $http) {
         if(isName){
             $http({
                 method: 'POST',
-                url: k_protocol+'/user',
+                url: k_protocol+'/user/result',
                 data:$.param($scope.user),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-            }).then(function successCallback(res) {
+            }).then(
+                function successCallback(res) {
                 var ob = JSON.parse(JSON.stringify(res.data));
+                console.log(k_protocol+'/user');
+                console.log(ob);
+                console.log(res.data);
+                console.log(ob.code);
                 if(200==ob.code) {
                     console.log("注册成功");
                     window.sessionStorage.setItem("username", ob.data.nickname);
@@ -83,6 +88,7 @@ app.controller('registerCtrl',function ($scope, $http) {
         }).then(function successCallback(res) {
             var ob = JSON.parse(JSON.stringify(res.data));
                 if(200==ob.code) {
+                    console.log("----" + ob.code);
                     $scope.isName="am-icon-check am-success"
                     isName = true;
                 }else {

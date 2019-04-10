@@ -50,6 +50,8 @@
                                 <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
                                     <thead>
                                     <tr>
+                                        <th>用户</th>
+                                        <th>电影</th>
                                         <th>评论</th>
                                         <th>时间</th>
                                         <th>操作</th>
@@ -57,11 +59,13 @@
                                     </thead>
                                     <tbody>
                                     <tr class="gradeX" ng-repeat="remark in remarks">
-                                        <td width="50%">{{remark.content}}</td>
+                                        <td>{{remark.user.nickname}}</td>
+                                        <td>{{remark.movie.titlecn}}</td>
+                                        <td width="35%">{{remark.content}}</td>
                                         <td>{{remark.time}}</td>
                                         <td>
                                             <div class="tpl-table-black-operation">
-                                                <a ng-click="deleteremark(remark.remarkId)" class="tpl-table-black-operation-del">
+                                                <a ng-click="deleteremark(remark.remarkid)" class="tpl-table-black-operation-del">
                                                     <i class="am-icon-trash"></i> 删除
                                                 </a>
                                             </div>
