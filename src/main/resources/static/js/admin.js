@@ -127,8 +127,6 @@ app.controller('upMovieCtrl',function ($scope, $http) {
         $scope.movie.type = temp.toString();
         console.log("$scope.movie.type2:" + $scope.movie.type);
 
-
-        alert("暂停");
         //上传图片&电影信息
         if(uploadMovieId == null) {
             console.log("id为空");

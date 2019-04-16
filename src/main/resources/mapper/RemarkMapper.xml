@@ -21,14 +21,26 @@
       <result column="titleCn" property="titlecn" />
       <result column="img" property="img" />
     </association>
+
+    <association property="userLike" javaType="com.zhangjing.entity.UserLike">
+      <id column="id"  property="id" />
+      <result column="status" property="status" />
+    </association>
   </resultMap>
 
   <select id="selectRemarkByMovie" parameterType="int" resultMap="RemarkMap">
-    SELECT t.*,u.* FROM
-    remark t,umr m,user u
-    WHERE m.movieId=#{id} AND m.remarkId=t.remarkId AND m.userId=u.userId
+    select l.*,tu.*
+    from(SELECT t.*,u.*
+          FROM remark t,umr m,user u
+          WHERE m.remarkId=t.remarkId
+          AND m.userId=u.userId
+          and m.movieId=${movieId}) tu
+    left outer join (select l.*
+                      from user_like l
+                      where l.like_userId=${likeuserId}) l
+    on tu.remarkId = l.like_remarkId;
   </select>
-  
+
   <select id="selectRemarkByUser" parameterType="int" resultMap="RemarkMap">
     SELECT t.*,m.* FROM
     remark t,umr u, movie m

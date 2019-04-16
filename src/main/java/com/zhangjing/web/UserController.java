@@ -22,6 +22,7 @@ public class    UserController {
 
     /**
      * 注册后登陆
+     *
      * @param user
      * @param httpSession
      * @return
@@ -39,14 +40,15 @@ public class    UserController {
 
     /**
      * 登陆 保存httpSession
+     *
      * @param user
      * @param httpSession
      * @return
      */
     @PostMapping("login")
     public Result userLogin(User user, HttpSession httpSession) {
-        System.out.println("userLogin..."+
-                "用户名:"+user.getNumber() +
+        System.out.println("userLogin..." +
+                "用户名:" + user.getNumber() +
                 " 密码:" + user.getPassword());
         if (user.getNumber() == null || user.getPassword() == null) {
             return ResultGenerator.genFailResult("密码或用户名不能为空!");
@@ -68,6 +70,7 @@ public class    UserController {
 
     /**
      * 退出登陆
+     *
      * @param httpSession
      */
     @GetMapping("exit")
@@ -77,6 +80,7 @@ public class    UserController {
 
     /**
      * 检查用户名
+     *
      * @param nickname
      * @return
      */
@@ -90,7 +94,7 @@ public class    UserController {
         User user = userService.findBy("nickname", nickname);
         if (user == null) {
             return ResultGenerator.genSuccessResult("用户名可用");
-        }else {
+        } else {
             return ResultGenerator.genFailResult("用户名已存在");
         }
     }
@@ -124,6 +128,7 @@ public class    UserController {
 
     /**
      * 按名称 手机号查询
+     *
      * @param name
      * @param page
      * @param size
@@ -140,6 +145,7 @@ public class    UserController {
 
         return ResultGenerator.genSuccessResult(pageInfo);
     }
+
 
 
 }

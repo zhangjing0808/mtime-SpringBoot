@@ -20,7 +20,7 @@ public interface RemarkService{
 	 * @param movieId
 	 * @return
 	 */
-	List<Remark> remarkByMovieId(int movieId);
+	List<Remark> remarkByMovieId(int movieId,int userId);
 
 	/**
 	 * 查询用户评论

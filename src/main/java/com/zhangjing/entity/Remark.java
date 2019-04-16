@@ -15,6 +15,8 @@ public class Remark {
 
     private Movie movie;
 
+    private UserLike userLike;
+
     public Movie getMovie() {
         return movie;
     }
@@ -31,6 +33,14 @@ public class Remark {
         this.user = user;
     }
 
+    public UserLike getUserLike() {
+        return userLike;
+    }
+
+    public void setUserLike(UserLike userLike) {
+        this.userLike = userLike;
+    }
+
     @Override
     public String toString() {
         return "Remark{" +
@@ -39,6 +49,7 @@ public class Remark {
                 ", time='" + time + '\'' +
                 ", user=" + user.getNickname() +
                 ", movie=" + movie.getTitlecn() +
+                ", userLike=" + userLike.getStatus() +
                 '}';
     }
 

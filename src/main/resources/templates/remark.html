@@ -4,18 +4,20 @@
     <meta charset="UTF-8"/>
     <title>评论</title>
     <link href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet"/>
+    <link href="/assets/css/heart.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
     <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
     <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
     <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script>
-
     <script type="text/javascript" src="rating/jquery.raty.min.js"></script>
     <script>
         var myApp=angular.module('remarkApp', []);
     </script>
     <script type="text/javascript" src="/js/remarks.js"></script>
     <script type="text/javascript" src="/js/header.js"></script>
+    <script src="layui/layui.js"></script>
 
 </head>
 <body ng-app="remarkApp">
@@ -49,7 +51,7 @@
                     </button>
                 </div>
             </div>
-            <div class="{{userinfo}}">
+            <div class="{{userinfo}}" id="user">
                 <div class="am-topbar-right">
                     <button ng-click="exit()"
                             class="am-btn am-btn-primary am-topbar-btn am-btn-sm am-radius">
@@ -147,8 +149,9 @@
                             <div class="am-comment-meta">
                                 <span class="am-comment-author">{{remark.user.nickname}}</span>
                                 <time>{{remark.time}}</time>
-                                <a href="" class="am-icon-thumbs-up" style="float:right;">
-                                    <i>赞</i>
+                                <i>{{remark.remarkid}}</i>
+                                <a href="" class="heart" id="like{{remark.remarkid}}" rel="like"
+                                        ng-click="findUserlike(remark.remarkid)" >
                                 </a>
                             </div>
                         </header>
@@ -159,7 +162,17 @@
                 </li>
             </ul>
         </div>
-
+        <!-- 点赞弹窗 -->
+        <div class="am-modal am-modal-alert" tabindex="-1" id="userlike-alert">
+            <div class="am-modal-dialog">
+                <div class="am-modal-bd">
+                    {{message}}
+                </div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn">确定</span>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -186,6 +199,7 @@
         </div>
     </div>
 </div>
+
 <div class="am-modal am-modal-alert" tabindex="-1" id="errorRemark-alert">
     <div class="am-modal-dialog">
         <div class="am-modal-bd">
@@ -210,6 +224,38 @@
         });
     });
 
+</script>
+
+<script type="text/javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+        if(window.sessionStorage.getItem("userid") != null) {
+            $('body').on("click",'.heart',function(){
+                    var A=$(this).attr("id");
+                    var B=A.split("like");
+                    var messageID=B[1];
+                    console.log("messageID:" +messageID);
+                    var C=parseInt($("#likeCount"+messageID).html());
+                    var D=$(this).attr("rel");//如果为Like则执行动画
+                    if(D =='like')
+                    {
+                        $("#likeCount"+messageID).html(C+1);
+                        $(this).addClass("heartAnimation").attr("rel","unlike");
+                        $(this).css("background-position","right");
+                        //不加这句有bug，动画最后又会到了起点，点击后强制使图片停在最右边，
+                    }
+                    else
+                    {
+                        $("#likeCount"+messageID).html(C-1);
+                        $(this).removeClass("heartAnimation").attr("rel","like");
+                        $(this).css("background-position","left");
+                        //点击后强制使红心变黑，否则显示悬停状态的红色的心
+                    }
+
+            });
+        }
+    });
+    /*]]>*/
 </script>
 </body>
 </html>

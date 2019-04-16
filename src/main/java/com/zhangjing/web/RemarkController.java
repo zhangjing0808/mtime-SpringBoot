@@ -1,6 +1,9 @@
 package com.zhangjing.web;
 
 import com.zhangjing.entity.Remark;
+import com.zhangjing.entity.UserLike;
+import com.zhangjing.enums.LikedStatusEnum;
+import com.zhangjing.service.LikedService;
 import com.zhangjing.service.RemarkService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -18,6 +21,9 @@ public class RemarkController {
     @Resource
     private RemarkService remarkService;
 
+    @Resource
+    private LikedService likedService;
+
     @PostMapping
     public Result add(String content,Integer score, Integer movieId, Integer userId) {
         System.out.println("评论"+content+" "+
@@ -33,9 +39,9 @@ public class RemarkController {
      * @param id
      * @return
      */
-    @GetMapping("/{id}")
-    public Result movieReamrk(@PathVariable Integer id) {
-        List<Remark> remarks = remarkService.remarkByMovieId(id);
+    @GetMapping("/{id}/{userId}")
+    public Result movieReamrk(@PathVariable("id") Integer id, @PathVariable("userId") Integer userId) {
+        List<Remark> remarks = remarkService.remarkByMovieId(id, userId);
         DateReplaceUtil.remarkDateUtil(remarks);
         return ResultGenerator.genSuccessResult(remarks);
     }
@@ -62,6 +68,43 @@ public class RemarkController {
     public Result delete(@PathVariable Integer id) {
         remarkService.deleteById(id);
         return ResultGenerator.genSuccessResult();
+    }
+
+    /**
+     * 插入一条点赞信息
+     * @param
+     * @return
+     */
+    @PostMapping("/like")
+    public Result addUserLike(UserLike userLike) {
+        System.out.println("进入addUserLike");
+        likedService.save(userLike);
+        return ResultGenerator.genSuccessResult("点赞成功！");
+    }
+
+    /**
+     * 查询评论的点赞信息
+     * @param remarkId
+     * @param userId
+     * @return
+     */
+    @GetMapping("/like")
+    public Result userLikeStatus(String remarkId,String userId) {
+        System.out.println("remarkId:" + remarkId);
+        System.out.println("userId:" + userId);
+        UserLike userLike = likedService.status(remarkId, userId);
+        return ResultGenerator.genSuccessResult(userLike);
+    }
+
+    @PutMapping("/like")
+    public Result update(UserLike userLike) {
+        System.out.println("进入update");
+        likedService.update(userLike);
+        if(userLike.getStatus() == 1) {
+            return ResultGenerator.genSuccessResult("点赞成功！");
+        }else {
+            return ResultGenerator.genSuccessResult("取消点赞成功！");
+        }
     }
 
    /* @PutMapping

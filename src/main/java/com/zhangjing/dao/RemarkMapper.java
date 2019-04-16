@@ -29,10 +29,10 @@ public interface RemarkMapper  {
 
 	/**
 	 * 查询电影的评论
-	 * @param id
+	 * @param
 	 * @return RemarkMap结果集
 	 */
-	List<Remark> selectRemarkByMovie(int id);
+	List<Remark> selectRemarkByMovie(@Param("movieId") int movieId,@Param("likeuserId") int likeuserId);
 
 	/**
 	 * 查询我的评论

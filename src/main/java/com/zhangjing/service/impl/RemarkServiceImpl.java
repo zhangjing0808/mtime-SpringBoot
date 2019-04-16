@@ -59,8 +59,8 @@ public class RemarkServiceImpl implements RemarkService {
     }
 
     @Override
-    public List<Remark> remarkByMovieId(int movieId) {
-        List<Remark> remarks = remarkMapper.selectRemarkByMovie(movieId);
+    public List<Remark> remarkByMovieId(int movieId,int userId) {
+        List<Remark> remarks = remarkMapper.selectRemarkByMovie(movieId, userId);
 
         return remarks;
     }
