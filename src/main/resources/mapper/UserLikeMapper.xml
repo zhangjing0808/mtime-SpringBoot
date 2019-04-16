@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangjing.dao.UserLikeMapper">
+    <resultMap id="UserLikeMap" type="com.zhangjing.entity.UserLike">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="likeRemarkid" jdbcType="VARCHAR" property="likeRemarkid" />
+        <result column="likeUserid" jdbcType="VARCHAR" property="likeUserid" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+    </resultMap>
+</mapper>
